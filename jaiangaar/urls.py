@@ -11,8 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path("",include("home.urls")),
-    
-    path("Leaderboard/",views.cham, name="Leaderboard"),
+
     path("accounts/",include("accounts.urls")),
     path("dashboard/", include("dashboard.urls")),
 

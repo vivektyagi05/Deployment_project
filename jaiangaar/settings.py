@@ -1,10 +1,13 @@
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-default-key")
 
-SECRET_KEY = 'django-insecure-w-b+0o6fxjnkl6zo+a9tt5m!49f%5^_cwa&7^7uz587npys__6'
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -91,12 +94,16 @@ USE_TZ = True
 
 # -------------------- STATIC & MEDIA FILES --------------------
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # ✅ for custom static files
+    BASE_DIR / 'static',
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 # -------------------- AUTHENTICATION REDIRECTS --------------------
@@ -118,12 +125,4 @@ MESSAGE_TAGS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import os
 
-STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
