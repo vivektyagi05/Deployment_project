@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+MY_Dare
+{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: 
+            radial-gradient(circle at 20% 80%, #ff6b35ca 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, #ff8c42 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, #fb9e12c5 0%, transparent 50%),
+            radial-gradient(circle at 60% 60%, #d74519cb 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, #d32f2f 0%, transparent 50%),
+            radial-gradient(circle at 20% 20%, #ff6f00cc 0%, transparent 50%),
+            linear-gradient(45deg, #b71c1c 0%, #d84315 25%, #ff5722 50%, #ff8f00 75%, #ffa000 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .header h1 {
+        font-size: 3.5rem;
+        color: #fff;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        margin-bottom: 10px;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+        to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.3); }
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+        margin-bottom: 30px;
+    }
+
+    .dare-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 25px;
+        padding: 30px;
+        margin-bottom: 25px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dare-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .dare-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .dare-name {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .deadline {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        background: rgba(102, 126, 234, 0.1);
+        border-radius: 15px;
+    }
+
+    .info-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
+        color: white;
+    }
+
+    .info-label {
+        font-size: 0.8rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .info-value {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .dare-description {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+    }
+
+    .dare-description h3 {
+        color: #e17055;
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+    }
+
+    .dare-description p {
+        color: #2d3436;
+        font-size: 1.1rem;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #fd79a8, #e84393);
+    }
+
+    .add-dare-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #00ff48df, #1818e7d2);
+        border: none;
+        border-radius: 50%;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(253, 121, 168, 0.4);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    .add-dare-btn:hover {
+        transform: scale(1.1) rotate(90deg);
+    }
+
+    @media (max-width: 768px) {
+        .dare-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .action-buttons {
+            justify-content: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+        }
+
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="header">
+        <br><br>
+        <br><br>
+        <br><br>
+
+        <h1>DARE SQUAD</h1>
+        <div class="subtitle">See what wild dares your friends are up to</div>
+    </div>
+
+    {% for dare in dares %}
+    <div class="dare-card">
+        <div class="dare-header">
+            <h2 class="dare-name">
+                {{ dare.name }} {% if dare.is_edited %}<small>(edited)</small>{% endif %}
+            </h2>
+            <div class="deadline">{{ dare.deadline }}</div>
+        </div>
+
+        <div class="dare-content" style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 250px;">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div>
+                            <div class="info-label">Email</div>
+                            <div class="info-value">{{ dare.email }}</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📱</div>
+                        <div>
+                            <div class="info-label">Phone</div>
+                            <div class="info-value">{{ dare.phone_number }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dare-description">
+                    <h3>💪 The Challenge</h3>
+                    <p>{{ dare.dare }}</p>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="{% url 'edit_dare' dare.id %}" class="btn btn-edit">✏️ Edit</a>
+                    <a href="{% url 'delete_dare' dare.id %}" class="btn btn-delete">🗑️ Delete</a>
+                </div>
+            </div>
+
+            <!-- Right Side Image -->
+            <div style="flex-shrink: 0;">
+                <img src="https://c0.wallpaperflare.com/preview/534/41/125/school-books-young-adult-education.jpg" alt="Dare Image"
+                    style="border-radius: 20px; max-width: 150px; height: auto;">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <button class="add-dare-btn" onclick="window.location.href='{% url 'add_dare' %}'">+</button>
+</div>
+
+<script>
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            if (!confirm("Are you sure you want to delete this dare?")) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+{% endblock %}

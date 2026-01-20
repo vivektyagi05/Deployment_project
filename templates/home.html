@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+
+Home Page
+
+{% endblock %}
+
+{% block body %}
+
+
+    <main>
+        <!-- Top Wonder Page -->
+        <section class="top-wonder">
+            <div class="container">
+                <div class="wonder-content">
+                    <div class="floating-elements">
+                        <div class="float-item">🎓</div>
+                        <div class="float-item">⚡</div>
+                        <div class="float-item">🚀</div>
+                        <div class="float-item">🌟</div>
+                        <div class="float-item">🎯</div>
+                    </div>
+                    <h1 class="wonder-title">Step Into The Adventure</h1>
+                    <p class="wonder-subtitle">Where College Dreams Meet Epic Challenges</p>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Students</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Colleges</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50K+</span>
+                            <span class="stat-label">Dares Completed</span>
+                        </div>
+                    </div>
+                    <div class="cta-container">
+                        <a href="#home" class="primary-cta">Join The Movement</a>
+                        <a href="#about" class="secondary-cta">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Welcome to DareU</h1>
+                    <p>The Ultimate College Dare Exchange Platform</p>
+                    <a href="#dares" class="cta-button">Start Your Adventure</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Why Choose DareU?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🎯</span>
+                        <h3>Safe & Fun</h3>
+                        <p>All dares are moderated to ensure they're safe, legal, and fun for everyone involved.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🏆</span>
+                        <h3>Compete & Win</h3>
+                        <p>Earn points, climb leaderboards, and unlock achievements as you complete dares.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">👥</span>
+                        <h3>Connect</h3>
+                        <p>Meet new people, make friends, and build your college network through shared adventures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="popular-dares">
+            <div class="container">
+                <h2>Popular Dares</h2>
+                <div class="dares-grid">
+                    <div class="dare-card">
+                        <div class="dare-title">Compliment Challenge</div>
+                        <div class="dare-description">Give genuine compliments to 10 strangers on campus</div>
+                        <span class="dare-difficulty">Easy</span>
+                    </div>
+                    <div class="dare-card">
+                        <div class="dare-title">Library Dance</div>
+                        <div class="dare-description">Do a 30-second silent dance in the library</div>
+                        <span class="dare-difficulty">Medium</span>
+                    </div>
+                    <div class="dare-card">
+                        <div class="dare-title">Random Act of Kindness</div>
+                        <div class="dare-description">Buy coffee for the person behind you in line</div>
+                        <span class="dare-difficulty">Easy</span>
+                    </div>
+                    <div class="dare-card">
+                        <div class="dare-title">Talent Show</div>
+                        <div class="dare-description">Perform your hidden talent in the student center</div>
+                        <span class="dare-difficulty">Hard</span>
+                    </div>
+                    <div class="dare-card">
+                        <div class="dare-title">Photo Bomb</div>
+                        <div class="dare-description">Photobomb 5 tourist photos around campus</div>
+                        <span class="dare-difficulty">Medium</span>
+                    </div>
+                    <div class="dare-card">
+                        <div class="dare-title">Study Buddy</div>
+                        <div class="dare-description">Help a stranger with their homework for 1 hour</div>
+                        <span class="dare-difficulty">Easy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Wonder Page -->
+        <section class="bottom-wonder">
+            <div class="container">
+                <div class="wonder-grid">
+                    <div class="wonder-left">
+                        <h2>Ready to Make History?</h2>
+                        <p>Join thousands of students who are already creating unforgettable memories and building lifelong friendships through DareU.</p>
+                        <div class="testimonials">
+                            <div class="testimonial">
+                                <div class="quote">"DareU helped me break out of my shell and make amazing friends!"</div>
+                                <div class="author">- Sarah, Stanford University</div>
+                            </div>
+                            <div class="testimonial">
+                                <div class="quote">"The best way to experience college life to the fullest!"</div>
+                                <div class="author">- Mike, Harvard University</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wonder-right">
+                <div class="signup-card">
+                    <h3>Start Your Journey</h3>
+                    <form class="signup-form" id="collegeForm">
+                    <input type="text" id="collegeName" placeholder="Your college name" required>
+                    <button type="submit">Get Started Now</button>
+                    </form>
+                    <p class="privacy-note">We respect your privacy. Your email is safe with us.</p>
+                </div>
+                </div>
+
+                <script>
+                document.getElementById("collegeForm").addEventListener("submit", function (event) {
+                    event.preventDefault(); // form ka default submit action roka
+                    let college = document.getElementById("collegeName").value.trim(); // input value lo
+
+                    if (college !== "") {
+                    // Google search URL me redirect karo
+                    let googleSearchUrl = "https://www.google.com/search?q=" + encodeURIComponent(college);
+                    window.open(googleSearchUrl, "_blank"); // nayi tab me open karega
+                    } else {
+                    alert("Please enter your college name!");
+                    }
+                });
+                </script>
+                <div class="social-proof">
+                    <h3>Trusted by Students at Top Universities</h3>
+                    <div class="university-logos">
+                        <span class="uni-name">Harvard</span>
+                        <span class="uni-name">Stanford</span>
+                        <span class="uni-name">MIT</span>
+                        <span class="uni-name">Yale</span>
+                        <span class="uni-name">Princeton</span>
+                        <span class="uni-name">Columbia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+{% endblock  %}
